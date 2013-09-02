@@ -15,13 +15,18 @@ public class MainMenuManager : ScreenManager
 		if( currentState != ScreenManager.ScreenState.INIT &&
 			currentState != ScreenManager.ScreenState.START )
 		{
-			if(PlayerPrefs.GetInt("FirstTimePlay") == 0)
+            if (PlayerPrefs.GetInt("FirstTimePlay") == 1)
             {
-                PlayerPrefs.SetInt("FirstTimePlay", 1);
+                PlayerPrefs.SetInt("FirstTimePlay", 0);
+
+                //First time playing, show tutorial first
                 Application.LoadLevel("Tutorial");
             }
             else
+            {
+                //Already played before, show selection screen
 			    Application.LoadLevel("LevelSelection");
+            }
 		}
 	}
 	
@@ -31,7 +36,7 @@ public class MainMenuManager : ScreenManager
 			currentState != ScreenManager.ScreenState.START )
 		{
 			//Debug.Log( " CREDITS " );
-			Application.LoadLevel( "CreditsScene" );
+			Application.LoadLevel("CreditsScene");
 		}
 	}
 	
