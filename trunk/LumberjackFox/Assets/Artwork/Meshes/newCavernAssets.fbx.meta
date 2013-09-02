@@ -1,0 +1,125 @@
+fileFormatVersion: 2
+guid: 2f201ecdc8172ca41a43bdf52ca40042
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: cavernFruit
+    100002: cavernPlants1
+    100004: cavernPlants2
+    100006: cavernPlants3
+    100008: cavernPlants4
+    100010: cavernPlants6
+    100012: cavernStone1
+    100014: cavernStone2
+    100016: cavernStone4
+    100018: cavernStone5
+    100020: cavernStoneCrawl
+    100022: cavernStoneMiddle
+    100024: cavernWallRight
+    100026: //RootNode
+    400000: cavernFruit
+    400002: cavernPlants1
+    400004: cavernPlants2
+    400006: cavernPlants3
+    400008: cavernPlants4
+    400010: cavernPlants6
+    400012: cavernStone1
+    400014: cavernStone2
+    400016: cavernStone4
+    400018: cavernStone5
+    400020: cavernStoneCrawl
+    400022: cavernStoneMiddle
+    400024: cavernWallRight
+    400026: //RootNode
+    2300000: cavernFruit
+    2300002: cavernPlants1
+    2300004: cavernPlants2
+    2300006: cavernPlants3
+    2300008: cavernPlants4
+    2300010: cavernPlants6
+    2300012: cavernStone1
+    2300014: cavernStone2
+    2300016: cavernStone4
+    2300018: cavernStone5
+    2300020: cavernStoneCrawl
+    2300022: cavernStoneMiddle
+    2300024: cavernWallRight
+    3300000: cavernFruit
+    3300002: cavernPlants1
+    3300004: cavernPlants2
+    3300006: cavernPlants3
+    3300008: cavernPlants4
+    3300010: cavernPlants6
+    3300012: cavernStone1
+    3300014: cavernStone2
+    3300016: cavernStone4
+    3300018: cavernStone5
+    3300020: cavernStoneCrawl
+    3300022: cavernStoneMiddle
+    3300024: cavernWallRight
+    4300000: cavernStoneCrawl
+    4300002: cavernStone5
+    4300004: cavernStone2
+    4300006: cavernStone4
+    4300008: cavernStoneMiddle
+    4300010: cavernWallRight
+    4300012: cavernStone1
+    4300014: cavernPlants3
+    4300016: cavernPlants2
+    4300018: cavernPlants4
+    4300020: cavernPlants1
+    4300022: cavernFruit
+    4300024: cavernPlants6
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .25
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
