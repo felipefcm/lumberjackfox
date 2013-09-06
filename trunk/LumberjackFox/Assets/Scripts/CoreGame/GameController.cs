@@ -88,8 +88,15 @@ public class GameController : MonoBehaviour {
 		
 		StateMachine();
 		
-		if(Input.GetKeyDown(KeyCode.Escape)){
-			HUDController.instace.pauseButton.GetComponentInChildren<SendMessageButtonComponent>().OnActivation();
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			
+			SendMessageButtonComponent sndMsgBtCp = HUDController.instace.pauseButton.GetComponentInChildren<SendMessageButtonComponent>();
+			if( sndMsgBtCp )
+			{
+				sndMsgBtCp.OnActivation();
+			}
+
 		}
 		
 		

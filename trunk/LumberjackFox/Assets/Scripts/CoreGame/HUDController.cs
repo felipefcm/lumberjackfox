@@ -41,16 +41,17 @@ public class HUDController : MonoBehaviour {
 	}
 	
 	public void ShowPause(){
-		GameController.instance.PauseGame();
 		
-		if(GameController.instance.currentState != GameState.PLAY){			
-			pauseGame.SetActive(false);
-			pauseButton.material.mainTexture = pauseTexture;
-		}
-		else{
-			pauseGame.SetActive(true);
-			pauseButton.material.mainTexture = playTexture;
-		}
+			GameController.instance.PauseGame();
+			
+			if(GameController.instance.currentState != GameState.PLAY){			
+				pauseGame.SetActive(false);
+				pauseButton.material.mainTexture = pauseTexture;
+			}
+			else{
+				pauseGame.SetActive(true);
+				pauseButton.material.mainTexture = playTexture;
+			}
 	}
 	
 	void ExitGame(){
