@@ -139,7 +139,7 @@ public class EndStageManager : ScreenManager
 				lumberLabel.LabelText = totalLumber.ToString( );
 				//starsLabel.LabelText = totalStars.ToString( );
 				timeLabel.LabelText = ToTime( resultTime );
-				scoreLabel.LabelText = stageScore.ToString( );
+				scoreLabel.LabelText = ( ( int ) stageScore ).ToString( );
 			
 				SwitchState( ScreenManager.ScreenState.START );
 			}
