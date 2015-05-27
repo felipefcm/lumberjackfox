@@ -1,4 +1,4 @@
-# lumberjackfox
+# The Lumberjack and the Fox
 
 Game developed at SPJam 2013 - 48h Game Jam
 
