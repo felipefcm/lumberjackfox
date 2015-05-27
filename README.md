@@ -1,6 +1,6 @@
 # lumberjackfox
 
-Game made for SPJam 2013 - 48h Game Jam
+Game developed at SPJam 2013 - 48h Game Jam
 
 http://spjam.com.br/jogos/lumberjack_fox
 
