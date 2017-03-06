@@ -1,8 +1,6 @@
 # The Lumberjack and the Fox
 
-Game developed at SPJam 2013 - 48h Game Jam
-
-http://spjam.com.br/jogos/lumberjack_fox
+Game developed at SPJam - 48h Game Jam
 
 By:
 - André Gonzaga
