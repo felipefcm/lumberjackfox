@@ -16,17 +16,17 @@ public class AIEnemyAttackDetector : MonoBehaviour {
 	{
 		if(behaviour.currentState == AIController.ENEMY_STATE.DEAD)
 		{
-			this.collider.enabled = false;
+			this.GetComponent<Collider>().enabled = false;
 		}
 		else
 		{
-			this.collider.enabled = true;
+			this.GetComponent<Collider>().enabled = true;
 		}
 	}
 	
 	void OnTriggerEnter(Collider other)
 	{
-		if(other == GameController.instance.player.collider)
+		if(other == GameController.instance.player.GetComponent<Collider>())
 		{
 			if(behaviour.currentState != AIController.ENEMY_STATE.DEAD)
 			{
@@ -37,7 +37,7 @@ public class AIEnemyAttackDetector : MonoBehaviour {
 	
 	void OnTriggerExit(Collider other)
 	{
-		if(other == GameController.instance.player.collider)
+		if(other == GameController.instance.player.GetComponent<Collider>())
 		{
 			if(behaviour.currentState != AIController.ENEMY_STATE.DEAD)
 			{

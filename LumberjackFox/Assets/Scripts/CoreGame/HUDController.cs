@@ -65,7 +65,7 @@ public class HUDController : MonoBehaviour {
 	
 	public void Die(){
 		youLose.SetActive(true);
-		youLose.animation.Play();
+		youLose.GetComponent<Animation>().Play();
 		pauseGame.SetActive(true);
 		pauseButton.gameObject.SetActive(false);
 	}

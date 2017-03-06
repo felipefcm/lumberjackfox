@@ -23,7 +23,7 @@ public class BackgroundAudioController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if(this.audio.isPlaying)
+		if(this.GetComponent<AudioSource>().isPlaying)
 		{
 			if(Application.loadedLevelName == "Tutorial" ||
 				Application.loadedLevelName == "Cutscene1" ||
@@ -33,7 +33,7 @@ public class BackgroundAudioController : MonoBehaviour {
 				Application.loadedLevelName == "Chapter3" ||
 				Application.loadedLevelName == "Chapter4")
 			{
-				this.audio.Stop();
+				this.GetComponent<AudioSource>().Stop();
 			}
 		}
 		else
@@ -43,7 +43,7 @@ public class BackgroundAudioController : MonoBehaviour {
 				Application.loadedLevelName == "LevelSelection" ||
 				Application.loadedLevelName == "MainMenuScene")
 			{
-				this.audio.Play();
+				this.GetComponent<AudioSource>().Play();
 			}
 		}
 	}

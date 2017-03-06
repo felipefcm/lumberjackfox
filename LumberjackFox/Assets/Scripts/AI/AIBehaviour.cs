@@ -245,8 +245,8 @@ public class AIBehaviour : AIController
 		collider0.AddComponent<BoxCollider>();
 		collider1.AddComponent<BoxCollider>();
 	
-		patrolColliders[0] = collider0.collider;
-		patrolColliders[1] = collider1.collider;
+		patrolColliders[0] = collider0.GetComponent<Collider>();
+		patrolColliders[1] = collider1.GetComponent<Collider>();
 	
 		patrolColliders[0].isTrigger = true;
 		patrolColliders[1].isTrigger = true;

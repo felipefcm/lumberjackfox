@@ -9,11 +9,11 @@ public class AudioController : MonoBehaviour
 	{
 		if(clip == null)
 		{
-			audio.Stop();
+			GetComponent<AudioSource>().Stop();
 			return;
 		}
 		
-		if(audio.isPlaying)
+		if(GetComponent<AudioSource>().isPlaying)
 		{
 			if(lastFramePlayingAudioClip == clip)
 			{
@@ -21,16 +21,16 @@ public class AudioController : MonoBehaviour
 			}
 			else
 			{
-				audio.Stop();
-				audio.clip = clip;
-				audio.Play();
+				GetComponent<AudioSource>().Stop();
+				GetComponent<AudioSource>().clip = clip;
+				GetComponent<AudioSource>().Play();
 			}
 			lastFramePlayingAudioClip = clip;
 		}
 		else
 		{
-			audio.clip = clip;
-			audio.Play();	
+			GetComponent<AudioSource>().clip = clip;
+			GetComponent<AudioSource>().Play();	
 		}
 	}
 }

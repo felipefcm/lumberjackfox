@@ -15,7 +15,7 @@ public class CoinController : MonoBehaviour {
 	{
 		if(checkAudioToDestroy)
 		{
-			if(!audio.isPlaying)
+			if(!GetComponent<AudioSource>().isPlaying)
 			{
 				DestroyImmediate(this.gameObject);
 			}
@@ -24,14 +24,14 @@ public class CoinController : MonoBehaviour {
 	
 	public void playAudioWithDestroy(AudioClip Audio)
 	{
-		gameObject.audio.clip = Audio;
-		gameObject.audio.Play();
+		gameObject.GetComponent<AudioSource>().clip = Audio;
+		gameObject.GetComponent<AudioSource>().Play();
 		Renderer[] rend = gameObject.GetComponentsInChildren<Renderer>();
 		for (int i = 0; i < rend.Length; i++) 
 		{
 			rend[i].enabled = false;
 		}
-		gameObject.collider.enabled = false;
+		gameObject.GetComponent<Collider>().enabled = false;
 		checkAudioToDestroy = true;
 	}
 }

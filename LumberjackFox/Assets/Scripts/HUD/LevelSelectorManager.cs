@@ -23,9 +23,9 @@ public class LevelSelectorManager : ScreenManager
 	
 	public int LINE_BREAK = 3;
 	
-	private int MAX_LEVELS = 5;
+	private int MAX_LEVELS = 4;
 	
-	private string tutorialLevel = "Tutorial";
+	private string tutorialLevel = "Chapter1";
 	private string firstLevel = "Chapter2";
 	
 	private int numberOfLevels;
@@ -33,6 +33,12 @@ public class LevelSelectorManager : ScreenManager
 	
 	public void OnLevelSelection( string levelName )
 	{
+		if(levelName == "Chapter1")
+		{
+			Application.LoadLevel("Cutscene1");
+			return;
+		}
+
 		Application.LoadLevel( levelName );
 	}
 	
@@ -154,19 +160,23 @@ public class LevelSelectorManager : ScreenManager
 		unlockedLevels = new string[ MAX_LEVELS ];
 		int defaultValue = 0;
 		
-		unlockedLevels[ numberOfLevels ] = "Tutorial";
+		unlockedLevels[ numberOfLevels ] = "Chapter1";
 		++numberOfLevels;
 	
-		unlockedLevels[ numberOfLevels ] = "Chapter2";
-		++numberOfLevels;
-			
+		if(PlayerPrefs.GetInt("Chapter2", defaultValue) == 1)
+		{
+			unlockedLevels[ numberOfLevels ] = "Chapter2";
+			++numberOfLevels;
+
+			Debug.Log( "Chapter2 unlocked" );
+		}
 		
 		if( PlayerPrefs.GetInt( "Chapter3", defaultValue ) == 1 )
 		{
 			unlockedLevels[ numberOfLevels ] = "Chapter3";
 			++numberOfLevels;
 			
-			Debug.Log( "Chapter3" );
+			Debug.Log( "Chapter3 unlocked" );
 		}
 		
 		if( PlayerPrefs.GetInt( "Chapter4", defaultValue ) == 1 )
@@ -174,9 +184,7 @@ public class LevelSelectorManager : ScreenManager
 			unlockedLevels[ numberOfLevels ] = "Chapter4";
 			++numberOfLevels;
 			
-			Debug.Log( "Chapter4" );
+			Debug.Log( "Chapter4 unlocked" );
 		}
-		
-		//Debug.Log( "Trololol" );
 	}
 }

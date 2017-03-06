@@ -179,32 +179,33 @@ public class EndStageManager : ScreenManager
 	
 	private string GetNextLevel( string currentLevel )
 	{
+		//Cutscene1 -> Chapter1 -> Chapter2 -> Cutscene2 -> Chapter3 -> Chapter4 -> Cutscene3
+
 		switch( currentLevel )
 		{
-			case "Tutorial":
+			case "Chapter1":
 			{
-				PlayerPrefs.SetInt( currentLevel, 1 );
-				return "Cutscene1";
+				PlayerPrefs.SetInt( "Chapter2", 1 );
+				return "Chapter2";
 			}
 			break;
 			
 			case "Chapter2":
 			{
-				PlayerPrefs.SetInt( currentLevel, 1 );
-				return "Chapter3";
+				PlayerPrefs.SetInt( "Chapter3", 1 );
+				return "Cutscene2";
 			}
 			break;
 			
 			case "Chapter3":
 			{
-				PlayerPrefs.SetInt( currentLevel, 1 );
+				PlayerPrefs.SetInt( "Chapter4", 1 );
 				return "Chapter4";
 			}
 			break;
 			
 			case "Chapter4":
 			{
-				PlayerPrefs.SetInt( currentLevel, 1 );
 				return "Cutscene3";
 			}
 			break;

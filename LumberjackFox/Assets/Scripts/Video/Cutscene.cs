@@ -6,6 +6,7 @@ using System.Collections;
 public class Cutscene : MonoBehaviour 
 {
 	public MovieTexture m_VideoFile;
+	public string nextLevelName;
 	
 	private float m_CurrentTime;
 
@@ -13,10 +14,10 @@ public class Cutscene : MonoBehaviour
 	{
 		m_CurrentTime = 0;
 
-		m_VideoFile = renderer.material.mainTexture as MovieTexture;
-		audio.clip = m_VideoFile.audioClip;
+		m_VideoFile = GetComponent<Renderer>().material.mainTexture as MovieTexture;
+		GetComponent<AudioSource>().clip = m_VideoFile.audioClip;
 
-		audio.Play();
+		GetComponent<AudioSource>().Play();
 		m_VideoFile.Play();
 	}
 
@@ -26,12 +27,7 @@ public class Cutscene : MonoBehaviour
 
 		if (!m_VideoFile.isPlaying)
 		{
-			if(Application.loadedLevel < Application.levelCount - 1)
-            {
-				Application.LoadLevel(Application.loadedLevel + 1);
-            }
-			else
-				Application.Quit();
+			Application.LoadLevel(nextLevelName);
 		}
 	}
 }

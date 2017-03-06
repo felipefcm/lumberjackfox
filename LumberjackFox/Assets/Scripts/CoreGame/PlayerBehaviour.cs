@@ -88,7 +88,7 @@ public class PlayerBehaviour : MonoBehaviour {
 				
 				if(!playDeathOnlyOneTime)
 				{
-					audioController.audio.PlayOneShot(death);
+					audioController.GetComponent<AudioSource>().PlayOneShot(death);
 					playDeathOnlyOneTime = true;
 				}
 			}
@@ -150,8 +150,8 @@ public class PlayerBehaviour : MonoBehaviour {
 				
 				if(isGroundedAcc != characterController.isGrounded)
 				{
-					audioController.audio.Stop();
-					audioController.audio.PlayOneShot(landingAudio);
+					audioController.GetComponent<AudioSource>().Stop();
+					audioController.GetComponent<AudioSource>().PlayOneShot(landingAudio);
 				}
 				
 			}
@@ -159,14 +159,14 @@ public class PlayerBehaviour : MonoBehaviour {
 			{
 				if(isGroundedAcc != characterController.isGrounded)
 				{
-					audioController.audio.Stop();
+					audioController.GetComponent<AudioSource>().Stop();
 					if(superJump)
 					{
-						audioController.audio.PlayOneShot(boingAudio);
+						audioController.GetComponent<AudioSource>().PlayOneShot(boingAudio);
 					}
 					else
 					{
-						audioController.audio.PlayOneShot(jumpAudio);
+						audioController.GetComponent<AudioSource>().PlayOneShot(jumpAudio);
 					}
 				}
 			}
@@ -235,7 +235,7 @@ public class PlayerBehaviour : MonoBehaviour {
 			
 			other.gameObject.AddComponent<CoinController>();
 			other.gameObject.AddComponent<AudioSource>();
-			other.audio.playOnAwake = false;
+			other.GetComponent<AudioSource>().playOnAwake = false;
 			CoinController coin = other.GetComponent<CoinController>();
 			coin.playAudioWithDestroy(attackHitAudio);
 		}
@@ -279,8 +279,8 @@ public class PlayerBehaviour : MonoBehaviour {
 	void Attack(){
 		if(currentRateAttack > attackRate){
 			animatorPlayer.SetInteger("attack",Random.Range(1,3));
-			weapon.collider.enabled = true;
-			audioController.audio.PlayOneShot(attackMissAudio);
+			weapon.GetComponent<Collider>().enabled = true;
+			audioController.GetComponent<AudioSource>().PlayOneShot(attackMissAudio);
 			currentRateAttack = 0;
 		}
 	}

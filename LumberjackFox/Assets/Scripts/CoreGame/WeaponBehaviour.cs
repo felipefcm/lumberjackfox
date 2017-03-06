@@ -10,15 +10,15 @@ public class WeaponBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(collider.enabled)
-			collider.enabled = false;
+		if(GetComponent<Collider>().enabled)
+			GetComponent<Collider>().enabled = false;
 	}
 	
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.CompareTag("Enemy")){
 			if(other.transform.parent.GetComponent<AIController>() != null)
 				other.transform.parent.GetComponent<AIController>().Hit();
-			Camera.main.transform.parent.animation.Play();
+			Camera.main.transform.parent.GetComponent<Animation>().Play();
 			
 		}
 		
