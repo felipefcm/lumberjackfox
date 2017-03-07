@@ -22,12 +22,11 @@ public class DestructiveBehaviour : AIController
 	{
 		if( m_LeafParticleSystem )
 			Instantiate(m_LeafParticleSystem.gameObject, transform.position, transform.rotation);
+
 		if(activeTrigger)
 			GetComponent<ActiveTriggerBehaviour>().ActiveTrigger();
+
 		Destroy(gameObject);
 	}
-	
-	
-	
-	
+		
 }

@@ -18,6 +18,7 @@ public abstract class AIController : MonoBehaviour
 	
 	protected CharacterMotor moveController;
 	protected CharacterController characterController;
+	protected PlatformInputController platformInputController;
 	
 	public Vector3 patrolInitialPosition;
 	public Vector3 patrolFinalPosition;
@@ -33,6 +34,7 @@ public abstract class AIController : MonoBehaviour
 	{
 		moveController = this.gameObject.GetComponent<CharacterMotor>();
 		characterController = this.gameObject.GetComponent<CharacterController>();
+		platformInputController = FindObjectOfType<PlatformInputController>();
 	}
 	
 	protected void  Start ()
@@ -48,15 +50,22 @@ public abstract class AIController : MonoBehaviour
 		if(GameController.instance != null && GameController.instance.currentState != GameState.PLAY){
 			if(moveController != null)
 				moveController.enabled = false;
+
 			if(characterController != null)
 				characterController.enabled = false;
+
+			if(platformInputController != null)
+				platformInputController.enabled = false;
+
 			return;
 		}
 		else{
 			if(currentState != ENEMY_STATE.DEAD)
 			{
-				moveController.enabled = true;
 				characterController.enabled = true;
+
+				if(platformInputController != null)
+					platformInputController.enabled = true;
 			}
 		}
 			

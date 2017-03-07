@@ -25,7 +25,7 @@ public class Cutscene : MonoBehaviour
 	{
 		m_CurrentTime += Time.deltaTime;
 
-		if (!m_VideoFile.isPlaying)
+		if (!m_VideoFile.isPlaying || (m_CurrentTime > 2.0f && Input.GetKeyDown(KeyCode.Return)))
 		{
 			Application.LoadLevel(nextLevelName);
 		}

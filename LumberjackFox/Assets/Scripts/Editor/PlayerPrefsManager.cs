@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public class PlayerPrefsManager : EditorWindow
+public class PlayerPrefsManager
 {
     [MenuItem("4Ever_Alone/Set FirstTime")]
     private static void PrefsShow()

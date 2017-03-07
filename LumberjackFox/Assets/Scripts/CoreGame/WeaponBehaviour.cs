@@ -18,7 +18,8 @@ public class WeaponBehaviour : MonoBehaviour {
 		if(other.gameObject.CompareTag("Enemy")){
 			if(other.transform.parent.GetComponent<AIController>() != null)
 				other.transform.parent.GetComponent<AIController>().Hit();
-			Camera.main.transform.parent.GetComponent<Animation>().Play();
+
+			//Camera.main.transform.parent.GetComponent<Animation>().Play();
 			
 		}
 		
