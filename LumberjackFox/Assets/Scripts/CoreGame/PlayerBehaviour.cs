@@ -14,6 +14,8 @@ public class PlayerBehaviour : MonoBehaviour {
 	
 	public float attackRate;
 	private float currentRateAttack;
+
+	public float playerMaxHeight = 15.0f;
 	
 	public float minPositionToDie;
 	
@@ -70,14 +72,15 @@ public class PlayerBehaviour : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-		if(gameController.currentState == GameState.WAIT_DIALOG || gameController.currentState == GameState.PAUSE){
+	void Update ()
+	{	
+		if(gameController.currentState == GameState.WAIT_DIALOG || gameController.currentState == GameState.PAUSE)
+		{
 			motor.enabled = false;
 			inputPlayer.canControl = false;
+
 			return;
 		}
-		
 		
 		if(gameController.currentState != GameState.PLAY && gameController.currentState != GameState.START)
 		{
@@ -93,139 +96,136 @@ public class PlayerBehaviour : MonoBehaviour {
 				}
 			}
 			
+			return;
 		}
-		else{
-			animatorPlayer.SetBool("die",false);
-			motor.enabled = true;
-			inputPlayer.canControl = true;
+
+		if(transform.position.y > playerMaxHeight)
+			transform.position = new Vector3(transform.position.x, playerMaxHeight, transform.position.z);
+
+		animatorPlayer.SetBool("die",false);
+		motor.enabled = true;
+		inputPlayer.canControl = true;
 			
-			Vector3 newPosition = transform.position;
-			newPosition.z = gameController.platformZAxi;
+		Vector3 newPosition = transform.position;
+		newPosition.z = gameController.platformZAxi;
 			
-			if(Input.GetKey(KeyCode.LeftControl)){
-				Attack();
+		if(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+			Attack();
+		else
+			animatorPlayer.SetInteger("attack", 0);
+			
+		if(currentRateAttack < attackRate+1)
+			currentRateAttack += Time.deltaTime;
+			
+		if(transform.position.y <= minPositionToDie)
+			gameController.ChangeState(GameState.DIE);
+			
+		if(Input.GetKey(KeyCode.LeftShift)){
+			running = true;
+			motor.inputMoveDirection *= runSpeedMultiply;
+		}
+		else
+			running = false;
+			
+		if(motor.jumping.baseHeight > 1){
+			curretTimeToCancelSuperJump  += Time.deltaTime;
+			if(curretTimeToCancelSuperJump > 0.2f){
+				curretTimeToCancelSuperJump = 0;
+				motor.jumping.baseHeight = 1;
 			}
-			else
-				animatorPlayer.SetInteger("attack",0);
-			
-			if(currentRateAttack < attackRate+1)
-				currentRateAttack += Time.deltaTime;
-			
-			if(transform.position.y <= minPositionToDie)
-				gameController.ChangeState(GameState.DIE);
-			
-			if(Input.GetKey(KeyCode.LeftShift)){
-				running = true;
-				motor.inputMoveDirection *= runSpeedMultiply;
-			}
-			else
-				running = false;
-			
-			if(motor.jumping.baseHeight > 1){
-				curretTimeToCancelSuperJump  += Time.deltaTime;
-				if(curretTimeToCancelSuperJump > 0.2f){
-					curretTimeToCancelSuperJump = 0;
-					motor.jumping.baseHeight = 1;
-				}
-			}
-			//Sound
-			if(characterController.isGrounded)
+		}
+		//Sound
+		if(characterController.isGrounded)
+		{
+			if(motor.inputMoveDirection != Vector3.zero)
 			{
-				if(motor.inputMoveDirection != Vector3.zero)
+				if(!running)
 				{
-					if(!running)
-					{
-						audioController.playAudio(walkingAudio);
-					}
-					else
-					{
-						audioController.playAudio(runingAudio);
-					}
-					
+					audioController.playAudio(walkingAudio);
 				}
 				else
 				{
-					audioController.playAudio(null);
+					audioController.playAudio(runingAudio);
 				}
-				
-				if(isGroundedAcc != characterController.isGrounded)
-				{
-					audioController.GetComponent<AudioSource>().Stop();
-					audioController.GetComponent<AudioSource>().PlayOneShot(landingAudio);
-				}
-				
+					
 			}
 			else
 			{
-				if(isGroundedAcc != characterController.isGrounded)
-				{
-					audioController.GetComponent<AudioSource>().Stop();
-					if(superJump)
-					{
-						audioController.GetComponent<AudioSource>().PlayOneShot(boingAudio);
-					}
-					else
-					{
-						audioController.GetComponent<AudioSource>().PlayOneShot(jumpAudio);
-					}
-				}
+				audioController.playAudio(null);
 			}
+				
 			if(isGroundedAcc != characterController.isGrounded)
 			{
-				timeToPlayBoingAcc = Time.time;
+				audioController.GetComponent<AudioSource>().Stop();
+				audioController.GetComponent<AudioSource>().PlayOneShot(landingAudio);
 			}
-			if(Time.time - timeToPlayBoingAcc > timeToPlayBoing)
-			{
-				superJump = false;
-			}
-			
-			isGroundedAcc = characterController.isGrounded;
-			
-			//animation
-			if(characterController.isGrounded){
 				
-				if(motor.inputMoveDirection == Vector3.zero){
-					//iddle
-					
-					animatorPlayer.SetBool("running",false);
-					animatorPlayer.SetBool("walking",false);
-					animatorPlayer.SetBool("jump",false);
-					animatorPlayer.SetBool("iddle",true);
+		}
+		else
+		{
+			if(isGroundedAcc != characterController.isGrounded)
+			{
+				audioController.GetComponent<AudioSource>().Stop();
+				if(superJump)
+				{
+					audioController.GetComponent<AudioSource>().PlayOneShot(boingAudio);
 				}
-				else{
-					if(!running){
-						//walk
-						animatorPlayer.SetBool("walking",true);
-						animatorPlayer.SetBool("running",false);
-						animatorPlayer.SetBool("jump",false);
-						animatorPlayer.SetBool("iddle",false);
-						
-					}
-					else{
-						animatorPlayer.SetBool("walking",false);
-						animatorPlayer.SetBool("running",true);
-						animatorPlayer.SetBool("jump",false);
-						
-						animatorPlayer.SetBool("iddle",false);
-						//run
-					}
+				else
+				{
+					audioController.GetComponent<AudioSource>().PlayOneShot(jumpAudio);
 				}
-
 			}
-			else if(!characterController.isGrounded){
-				//jump one time
+		}
+		if(isGroundedAcc != characterController.isGrounded)
+		{
+			timeToPlayBoingAcc = Time.time;
+		}
+		if(Time.time - timeToPlayBoingAcc > timeToPlayBoing)
+		{
+			superJump = false;
+		}
+			
+		isGroundedAcc = characterController.isGrounded;
+			
+		//animation
+		if(characterController.isGrounded){
+				
+			if(motor.inputMoveDirection == Vector3.zero){
+				//iddle
+					
 				animatorPlayer.SetBool("running",false);
 				animatorPlayer.SetBool("walking",false);
-				animatorPlayer.SetBool("jump",true);
-				animatorPlayer.SetBool("iddle",false);
-				
-				
-				
+				animatorPlayer.SetBool("jump",false);
+				animatorPlayer.SetBool("iddle",true);
+			}
+			else{
+				if(!running){
+					//walk
+					animatorPlayer.SetBool("walking",true);
+					animatorPlayer.SetBool("running",false);
+					animatorPlayer.SetBool("jump",false);
+					animatorPlayer.SetBool("iddle",false);
+						
+				}
+				else{
+					animatorPlayer.SetBool("walking",false);
+					animatorPlayer.SetBool("running",true);
+					animatorPlayer.SetBool("jump",false);
+						
+					animatorPlayer.SetBool("iddle",false);
+					//run
+				}
 			}
 
 		}
-		
-	
+		else if(!characterController.isGrounded){
+			//jump one time
+			animatorPlayer.SetBool("running",false);
+			animatorPlayer.SetBool("walking",false);
+			animatorPlayer.SetBool("jump",true);
+			animatorPlayer.SetBool("iddle",false);
+		}
+			
 	}
 	
 	void OnTriggerEnter(Collider other){
@@ -286,7 +286,10 @@ public class PlayerBehaviour : MonoBehaviour {
 	}
 	
 	public void SupperJump(float jumpForce){
+		//Debug.Log("Before SJ BaseHeight: " + motor.jumping.baseHeight + " - " + Time.time + " - H " + transform.position.y);
 		motor.jumping.baseHeight *= jumpForce;
+		//Debug.Log("After SJ BaseHeight: " + motor.jumping.baseHeight + " - " + Time.time + " - H " + transform.position.y);
+
 		motor.requestJump = true;
 		superJump = true;
 	}
@@ -296,5 +299,10 @@ public class PlayerBehaviour : MonoBehaviour {
 		if(life == 0){
 			gameController.ChangeState(GameState.DIE);
 		}
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.DrawCube(new Vector3(transform.position.x, playerMaxHeight, transform.position.z), new Vector3(1.0f, 1.0f, 1.0f));
 	}
 }

@@ -26,7 +26,7 @@ public class LevelSelectorManager : ScreenManager
 	private int MAX_LEVELS = 4;
 	
 	private string tutorialLevel = "Chapter1";
-	private string firstLevel = "Chapter2";
+	private string firstLevel = "Chapter1";
 	
 	private int numberOfLevels;
 	#endregion
@@ -59,12 +59,12 @@ public class LevelSelectorManager : ScreenManager
 	{
 		if( unlockedLevels == null || unlockedLevels.Length <= 0 || numberOfLevels <= 0)
 		{
-			Debug.Log( "Warning! Any level was found! Loading the two firsts!" );
+			Debug.Log( "Warning! Any level was found! Loading the first!" );
 			unlockedLevels = new string[ 2 ];
 			unlockedLevels[ 0 ] = tutorialLevel;
-			unlockedLevels[ 1 ] = firstLevel;
+			//unlockedLevels[ 1 ] = firstLevel;
 			
-			numberOfLevels = 2;
+			numberOfLevels = 1;
 		}
 		
 		InstantiateLevels( );

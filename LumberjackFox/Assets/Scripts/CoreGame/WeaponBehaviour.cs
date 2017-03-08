@@ -3,15 +3,30 @@ using System.Collections;
 
 public class WeaponBehaviour : MonoBehaviour {
 
+	public float timeEnabled = 1.0f;
+	private float timeEnabledCounter = 0f;
+
+	private Collider weaponCollider;
+
 	// Use this for initialization
 	void Start () {
-	
+		weaponCollider = GetComponent<Collider>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(GetComponent<Collider>().enabled)
-			GetComponent<Collider>().enabled = false;
+
+		if(weaponCollider.enabled)
+		{
+			timeEnabledCounter += Time.deltaTime;
+
+			if(timeEnabledCounter >= timeEnabled)
+				weaponCollider.enabled = false;
+		}
+		else
+		{
+			timeEnabledCounter = 0;
+		}
 	}
 	
 	void OnTriggerEnter(Collider other){
