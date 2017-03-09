@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BackgroundAudioController : MonoBehaviour {
 	
+	private AudioSource audioSrc;
+
 	void Awake()
 	{
 		DontDestroyOnLoad(this.gameObject);
@@ -17,33 +19,33 @@ public class BackgroundAudioController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+		audioSrc = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(this.GetComponent<AudioSource>().isPlaying)
+		if(audioSrc.isPlaying)
 		{
-			if(Application.loadedLevelName == "Tutorial" ||
-				Application.loadedLevelName == "Cutscene1" ||
+			if(	Application.loadedLevelName == "Cutscene1" ||
 				Application.loadedLevelName == "Cutscene2" ||
 				Application.loadedLevelName == "Cutscene3" ||
+				Application.loadedLevelName == "Chapter1" ||
 				Application.loadedLevelName == "Chapter2" ||
 				Application.loadedLevelName == "Chapter3" ||
 				Application.loadedLevelName == "Chapter4")
 			{
-				this.GetComponent<AudioSource>().Stop();
+				audioSrc.Stop();
 			}
 		}
 		else
 		{
 				if(Application.loadedLevelName == "CreditsScene" ||
-				Application.loadedLevelName == "EndStageScene" ||
-				Application.loadedLevelName == "LevelSelection" ||
-				Application.loadedLevelName == "MainMenuScene")
+					Application.loadedLevelName == "EndStageScene" ||
+					Application.loadedLevelName == "LevelSelection" ||
+					Application.loadedLevelName == "MainMenuScene")
 			{
-				this.GetComponent<AudioSource>().Play();
+				audioSrc.Play();
 			}
 		}
 	}

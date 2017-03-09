@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 
 public enum GameState{
@@ -27,7 +28,11 @@ public class GameController : MonoBehaviour {
 	
 	public static GameController instance;
 	
-	private float timePassed;
+	public CheckpointManager checkpointManager;
+	
+	[HideInInspector]
+	public float timePassed;
+
 	private float timeToDie;
 	
 	public int currentLevel;
@@ -37,8 +42,10 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		instance = this;
 		
-		
-		SpecialLevelEvent.instance.gameObject.SetActive(false);
+		checkpointManager = FindObjectOfType<CheckpointManager>();
+
+		if(SpecialLevelEvent.instance != null)
+			SpecialLevelEvent.instance.gameObject.SetActive(false);
 		
 		//Start Elements in z Axi;
 			
@@ -67,6 +74,14 @@ public class GameController : MonoBehaviour {
 				newPosition.z = platformZAxi;
 				enemy.transform.position = newPosition;
 			}
+
+			Checkpoint[] checkpoints = GameObject.FindObjectsOfType(typeof(Checkpoint)) as Checkpoint[];	
+			
+			foreach(Checkpoint checkpoint in checkpoints){
+				newPosition = checkpoint.transform.position;
+				newPosition.z = platformZAxi;
+				checkpoint.transform.position = newPosition;
+			}
 			
 			newPosition = endGame.transform.position;
 			newPosition.z = platformZAxi;
@@ -76,11 +91,16 @@ public class GameController : MonoBehaviour {
 			newPosition.z = platformZAxi;
 			startGame.transform.position = newPosition;
 			
+			if(checkpointManager == null || checkpointManager.GetPosition() == Vector3.zero)
+			{
+				player.transform.position = startGame.transform.position;
+			}
+			else
+			{
+				player.transform.position = checkpointManager.GetPosition();
+				timePassed = checkpointManager.GetLastTimePassed();
+			}
 			
-			player.transform.position = startGame.transform.position;
-			
-			//
-		
 	}
 	
 	// Update is called once per frame
@@ -167,9 +187,10 @@ public class GameController : MonoBehaviour {
 	}
 	
 	public bool CanFinishLevel(){
-		if(currentCoins >= coinsToNextLevel)
-			return true;
-		else
-			return false;
+		//if(currentCoins >= coinsToNextLevel)
+		//	return true;
+		//else
+		//	return false;
+		return true;
 	}
 }

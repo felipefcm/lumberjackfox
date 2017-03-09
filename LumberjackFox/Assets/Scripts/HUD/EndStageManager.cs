@@ -45,6 +45,10 @@ public class EndStageManager : ScreenManager
 	public void OnNext( )
 	{
 		//Debug.Log( " NEXT " );
+
+		if(FindObjectOfType<CheckpointManager>() != null)
+			FindObjectOfType<CheckpointManager>().ResetPosition();
+
 		Application.LoadLevel ( nextLevel );
 	}
 
@@ -179,14 +183,14 @@ public class EndStageManager : ScreenManager
 	
 	private string GetNextLevel( string currentLevel )
 	{
-		//Cutscene1 -> Chapter1 -> Chapter2 -> Cutscene2 -> Chapter3 -> Chapter4 -> Cutscene3
+		//Chapter1 -> Cutscene1 -> Chapter2 -> Cutscene2 -> Chapter3 -> Chapter4 -> Cutscene3
 
 		switch( currentLevel )
 		{
 			case "Chapter1":
 			{
 				PlayerPrefs.SetInt( "Chapter2", 1 );
-				return "Chapter2";
+				return "Cutscene1";
 			}
 			break;
 			

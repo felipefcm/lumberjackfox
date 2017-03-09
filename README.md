@@ -1,8 +1,10 @@
 # The Lumberjack and the Fox
 
-Game developed in Unity at SPJam - 48h Game Jam
+Game developed with Unity3d during SPJam - 48h Game Jam
 
-![Gameplay image](https://felipefcm.files.wordpress.com/2017/03/lf_4.png)
+![Gameplay image](./lf_4.png)
+![Gameplay image](./lf_12.png)
+![Gameplay image](./lf_21.png)
 
 By:
 - André Gonzaga

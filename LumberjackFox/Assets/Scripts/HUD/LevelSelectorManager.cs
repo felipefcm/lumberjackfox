@@ -33,11 +33,7 @@ public class LevelSelectorManager : ScreenManager
 	
 	public void OnLevelSelection( string levelName )
 	{
-		if(levelName == "Chapter1")
-		{
-			Application.LoadLevel("Cutscene1");
-			return;
-		}
+		FindObjectOfType<CheckpointManager>().ResetPosition();
 
 		Application.LoadLevel( levelName );
 	}
